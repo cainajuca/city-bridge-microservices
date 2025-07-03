@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  api1:
+    build:
+      context: .
+      dockerfile: ApiOne.Api/Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - sqlserver_api1
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver_api1;Database=MyDatabaseOne;User Id=sa;Password=Your_password123;TrustServerCertificate=true;
+      - ExternalApi__BaseUrl=http://api2:8080
+
+  api2:
+    build:
+      context: .
+      dockerfile: ApiTwo.Api/Dockerfile
+    ports:
+      - "8082:8080"
+    depends_on:
+      - sqlserver_api2
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver_api2;Database=MyDatabaseTwo;User Id=sa;Password=Your_password123;TrustServerCertificate=true;
+
+  sqlserver_api1:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_api1
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data_api1:/var/opt/mssql
+
+  sqlserver_api2:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_api2
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1434:1433"
+    volumes:
+      - sql_data_api2:/var/opt/mssql
+
+volumes:
+  sql_data_api1:
+  sql_data_api2:

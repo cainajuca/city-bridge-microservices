@@ -24,17 +24,6 @@ public class CityController : ControllerBase
         _apiTwoService = apiTwoService;
     }
 
-    /*
-    Next steps:
-    - Consolidate this API into a single project and ensure it runs (done)
-    - Git init and push this code (done)
-    - Apply the same changes to ApiTwo and get it 100% working
-    - Move ApiTwo into a second project within this same repository and push second commit
-    - Run both in parallel using docker-compose
-        - Check the docker-compose.yml file already in the repository (keep it inside ApiOne)
-    - Implement a Circuit Breaker using Polly
-    */
-
     [HttpGet("Mock")]
     public async Task<IActionResult> GetMock()
     {
