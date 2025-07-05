@@ -20,7 +20,7 @@ public class BridgeController : ControllerBase
         var responses = new List<Func<IActionResult>>
         {
             () => Ok(),
-            () => StatusCode(503, "Default"),
+            () => StatusCode(503, "Service Unavailable"),
             () => StatusCode(504, "Timeout error"),
             () => StatusCode(500, "Internal Server Error") // not transient error
         };
