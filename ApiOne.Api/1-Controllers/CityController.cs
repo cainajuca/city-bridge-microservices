@@ -27,41 +27,15 @@ public class CityController : ControllerBase
     [HttpGet("Mock")]
     public async Task<IActionResult> GetMock()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            var result = await _apiTwoService.GetMockAsync();
-            
-            if (result.IsSuccessStatusCode)
-                return Ok();
+        var response = await _apiTwoService.GetMockAsync();
 
-            if (result.StatusCode == HttpStatusCode.GatewayTimeout)
-            {
-                _logger.LogError("Gateway timeout occurred while calling the Catalog endpoint. Retrying attempt {Attempt}.", i + 1);
+        if (response.IsSuccessStatusCode)
+            return Ok();
 
-                // Exponential back-off: wait 2^i seconds before retrying to give the downstream service time to recover
-                await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, i)));
+        if (response.StatusCode == HttpStatusCode.InternalServerError)
+            return StatusCode(500, new { error = "Internal server error." });
 
-                continue;
-            }
-
-            if (result.StatusCode == HttpStatusCode.ServiceUnavailable)
-            {
-                _logger.LogError("Service unavailable when calling the Catalog endpoint. Retrying attempt {Attempt}.", i + 1);
-
-                // Exponential back-off: wait 2^i seconds before retrying to give the downstream service time to recover
-                await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, i)));
-                
-                continue;
-            }
-
-            if (result.StatusCode == HttpStatusCode.InternalServerError)
-            {
-                _logger.LogError("Internal server error received from the Catalog endpoint. Circuit breaker may be activated. Retrying attempt {Attempt}.", i + 1);
-                return StatusCode(500, new { error = "Internal server error." });
-            }
-        }
-
-        return StatusCode(500, new { error = "Exceeded retry attempts." });
+        return StatusCode(503, new { error = "Exceeded retry attempts." });
     }
 
     [HttpGet]
