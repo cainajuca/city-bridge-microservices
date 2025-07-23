@@ -2,6 +2,7 @@
 using ApiOne.Api.Domain.Dtos;
 using ApiOne.Api.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Net;
 
 namespace ApiOne.Api.Controllers;
@@ -27,14 +28,26 @@ public class CityController : ControllerBase
     [HttpGet("Mock")]
     public async Task<IActionResult> GetMock()
     {
+        var traceId = Activity.Current?.TraceId.ToString() ?? "no-trace";
+
+        _logger.LogInformation("Calling API2 MockAsync – TraceId: {TraceId}", traceId);
+
         var response = await _apiTwoService.GetMockAsync();
 
+        var status = (int)response.StatusCode;
         if (response.IsSuccessStatusCode)
+        {
+            _logger.LogInformation("API2 responded successfully – StatusCode: {StatusCode} – TraceId: {TraceId}", status, traceId);
             return Ok();
+        }
 
         if (response.StatusCode == HttpStatusCode.InternalServerError)
-            return StatusCode(500, new { error = "Internal server error." });
+        {
+            _logger.LogError("API2 responded with Internal Server Error – StatusCode: {StatusCode} – TraceId: {TraceId}", status, traceId);
+            return StatusCode(500, new { error = "Internal server error from external service." });
+        }
 
+        _logger.LogWarning("API2 returned non-success status – StatusCode: {StatusCode} – TraceId: {TraceId}", status, traceId);
         return StatusCode(503, new { error = "Exceeded retry attempts." });
     }
 

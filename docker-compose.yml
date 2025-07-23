@@ -9,10 +9,14 @@ services:
       - "8081:8080"
     depends_on:
       - sqlserver_api1
+      - elasticsearch
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=sqlserver_api1;Database=MyDatabaseOne;User Id=sa;Password=Your_password123;TrustServerCertificate=true;
       - ExternalApi__BaseUrl=http://api2:8080
+      - ElasticConfiguration__Uri=http://elasticsearch:9200
+    networks:
+      - elastic
 
   api2:
     build:
@@ -22,9 +26,38 @@ services:
       - "8082:8080"
     depends_on:
       - sqlserver_api2
+      - elasticsearch
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=sqlserver_api2;Database=MyDatabaseTwo;User Id=sa;Password=Your_password123;TrustServerCertificate=true;
+      - ElasticConfiguration__Uri=http://elasticsearch:9200
+    networks:
+      - elastic
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.1
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.14.2
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - elastic
 
   sqlserver_api1:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -49,6 +82,11 @@ services:
     volumes:
       - sql_data_api2:/var/opt/mssql
 
+networks:
+  elastic:
+    driver: bridge
+
 volumes:
   sql_data_api1:
   sql_data_api2:
+  elasticsearch_data:

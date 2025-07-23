@@ -1,6 +1,8 @@
 using ApiTwo.Api._2_Application.Services.UseCases;
 using ApiTwo.Api._3_Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Serilog.Events;
+using System.Diagnostics;
 
 namespace ApiTwo.Api._1_Controllers;
 
@@ -9,27 +11,48 @@ namespace ApiTwo.Api._1_Controllers;
 public class BridgeController : ControllerBase
 {
     private readonly IBridgeService _bridgeService;
-    public BridgeController(IBridgeService bridgeService)
+    private readonly ILogger<BridgeController> _logger;
+
+    public BridgeController(
+        IBridgeService bridgeService,
+        ILogger<BridgeController> logger)
     {
         _bridgeService = bridgeService;
+        _logger = logger;
     }
 
     [HttpGet("Mock")]
     public IActionResult MockEndpoint()
     {
-        var responses = new List<Func<IActionResult>>
+        var traceId = Activity.Current?.TraceId.ToString() ?? "no-trace";
+
+        _logger.LogInformation("Received Mock request – TraceId: {TraceId}", traceId);
+
+        var (code, message, level) = _responses[Random.Shared.Next(_responses.Length)];
+
+        switch (level)
         {
-            () => Ok(),
-            () => StatusCode(503, "Service Unavailable"),
-            () => StatusCode(504, "Timeout error"),
-            () => StatusCode(500, "Internal Server Error") // not transient error
-        };
+            case LogEventLevel.Information:
+                _logger.LogInformation("Responding with {StatusCode} — {Message}", code, message);
+                break;
+            case LogEventLevel.Warning:
+                _logger.LogWarning("Responding with {StatusCode} — {Message}", code, message);
+                break;
+            case LogEventLevel.Error:
+                _logger.LogError("Responding with {StatusCode} — {Message}", code, message);
+                break;
+        }
 
-        var rnd = new Random();
-        var response = responses[rnd.Next(responses.Count)];
-
-        return response();
+        return StatusCode(code, message);
     }
+
+    private static readonly (int Code, string Message, LogEventLevel Level)[] _responses =
+    [
+        (200, "OK", LogEventLevel.Information),
+        (503, "Service Unavailable", LogEventLevel.Warning),
+        (504, "Timeout error", LogEventLevel.Warning),
+        (500, "Internal Server Error", LogEventLevel.Error)
+    ];
 
     [HttpGet]
     public async Task<IActionResult> GetAllBridges()
