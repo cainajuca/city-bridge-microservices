@@ -1,0 +1,125 @@
+<mxfile host="65bd71144e">
+    <diagram id="_P9ASaWbQXKMjC1hsoml" name="Page-1">
+        <mxGraphModel dx="1084" dy="787" grid="0" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="36" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;endFill=0;" parent="1" source="6" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="310" y="330"/>
+                            <mxPoint x="180" y="330"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="37" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;endFill=0;" parent="1" source="6" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="380" y="330"/>
+                            <mxPoint x="510" y="330"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="6" value="Client (HTTP)&lt;div&gt;Swagger / Insomnia&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="285" y="250" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;entryX=0.667;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="8" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="430" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="360" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="40" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" parent="1" source="8" target="30" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="530" y="450"/>
+                            <mxPoint x="530" y="450"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="39" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" parent="1" source="9" target="31" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="160" y="450"/>
+                            <mxPoint x="160" y="450"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="300" y="540" width="90" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="" style="group" parent="23" vertex="1" connectable="0">
+                    <mxGeometry y="20" width="90" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://marketplace-assets.digitalocean.com/logos/sharklabs-kibana.svg;" parent="25" vertex="1">
+                    <mxGeometry y="10" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="Kibana" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;container=0;" parent="25" vertex="1">
+                    <mxGeometry x="15" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="300" y="440" width="90" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://plugins.jetbrains.com/files/16111/151977/icon/default.png;container=0;" parent="24" vertex="1">
+                    <mxGeometry y="20" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="Elasticsearch" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;container=0;" parent="24" vertex="1">
+                    <mxGeometry width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.servers.sql_server;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="460" width="60" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.servers.sql_server;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="460" width="60" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" style="edgeStyle=none;html=1;endArrow=block;endFill=1;" parent="1" source="15" target="20" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="270" y="670" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="35" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;startFill=0;" parent="1" source="47" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="270" y="410" as="sourcePoint"/>
+                        <mxPoint x="305" y="435" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="330" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="41" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;endFill=0;startArrow=block;startFill=1;" parent="1" source="8" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="500" y="390.00409915079183" as="sourcePoint"/>
+                        <mxPoint x="211.43999999999994" y="390.12" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="350" y="380"/>
+                            <mxPoint x="350" y="380"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="43" value="Http + Polly (retry + circuit breaker)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="360" width="190" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="120" y="350" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="City Platform&lt;div&gt;ApiOne (.NET 8)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="49" vertex="1">
+                    <mxGeometry width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="Serilog" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="49" vertex="1">
+                    <mxGeometry x="60" y="60" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="450" y="350" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Bridge Platform&lt;div&gt;ApiTwo (.NET 8)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="50" vertex="1">
+                    <mxGeometry width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="Serilog" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="50" vertex="1">
+                    <mxGeometry y="60" width="60" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
